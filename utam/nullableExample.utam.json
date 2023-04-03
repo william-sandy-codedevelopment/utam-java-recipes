@@ -1,0 +1,55 @@
+{
+  "root": true,
+  "selector": {
+    "css": "body"
+  },
+  "elements": [
+    {
+      "name": "nullableBasicElement",
+      "selector": {
+        "css": ".idontexist"
+      },
+      "public": true,
+      "nullable": true,
+      "elements": [
+        {
+          "name": "scopedInsideNullable",
+          "selector": {
+            "css": ".idontexist"
+          },
+          "public": true,
+          "nullable": true
+        }
+      ]
+    },
+    {
+      "name": "nullableBasicElementList",
+      "selector": {
+        "css": ".idontexist",
+        "returnAll": true
+      },
+      "public": true,
+      "nullable": true
+    },
+    {
+      "name": "nullableCustomElement",
+      "type": "utam/pageObjects/dummy",
+      "selector": {
+        "css": ".idontexist"
+      },
+      "public": true,
+      "nullable": true
+    },
+    {
+      "name": "nullableCustomElementList",
+      "type": "utam/pageObjects/dummy",
+      "selector": {
+        "css": ".idontexist",
+        "returnAll": true
+      },
+      "public": true,
+      "nullable": true
+    }
+  ]
+}
+

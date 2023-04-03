@@ -1,6 +1,0 @@
-{
-  "injectionConfigs": [
-    "ui-utam-pageobjects.config.json",
-    "utam-salesforceapp-pageobjects.config.json"
-  ]
-}

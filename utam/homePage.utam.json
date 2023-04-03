@@ -1,0 +1,68 @@
+{
+  "root": true,
+  "selector": {
+    "css": "body"
+  },
+  "beforeLoad": [
+    {
+      "apply": "waitFor",
+      "args": [
+        {
+          "type": "function",
+          "predicate": [
+            {
+              "element": "root",
+              "apply": "containsElement",
+              "args": [
+                {
+                  "type" : "locator",
+                  "value": {
+                    "css": ".oneContent.active app_flexipage-lwc-app-flexipage"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "name": "navigationBar",
+      "type": "utam-global/pageObjects/appNav",
+      "public": true,
+      "selector": {
+        "css": "one-appnav"
+      }
+    },
+    {
+      "name": "activeFlexiPage",
+      "selector": {
+        "css": ".oneContent.active app_flexipage-lwc-app-flexipage"
+      },
+      "type": "utam/pageObjects/appFlexipage",
+      "public": true
+    }
+  ],
+  "methods": [
+    {
+      "name": "getComponent",
+      "compose": [
+        {
+          "element": "activeFlexiPage"
+        },
+        {
+          "chain": true,
+          "apply": "waitForLoad",
+          "returnType": "utam/pageObjects/appFlexipage"
+        },
+        {
+          "chain": true,
+          "element": "flexipageComponent2",
+          "returnType": "utam-flexipage/pageObjects/component2"
+        }
+      ]
+    }
+  ]
+}
