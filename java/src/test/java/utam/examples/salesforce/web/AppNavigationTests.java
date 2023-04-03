@@ -7,6 +7,8 @@
  */
 package utam.examples.salesforce.web;
 
+import com.maxtaf.ApiService;
+
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -24,11 +26,12 @@ import utam.utils.salesforce.TestEnvironment;
  */
 public class AppNavigationTests extends SalesforceWebTestBase {
 
-  private final TestEnvironment testEnvironment = getTestEnvironment("sandbox44");
+  ApiService mxService = new ApiService();
+  private final TestEnvironment testEnvironment = getTestEnvironment("sandbox44", mxService);
 
   @BeforeTest
   public void setup() {
-    setupChrome();
+    setupChrome(mxService);
     login(testEnvironment, "home");
   }
 

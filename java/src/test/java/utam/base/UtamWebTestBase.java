@@ -116,8 +116,8 @@ public abstract class UtamWebTestBase {
    * @param envNamePrefix environment name prefix
    * @return object with a test environment information
    */
-  protected final TestEnvironment getTestEnvironment(String envNamePrefix) {
-    return new TestEnvironment(envNamePrefix);
+  protected final TestEnvironment getTestEnvironment(String envNamePrefix, ApiService mxService) {
+    return new TestEnvironment(envNamePrefix, mxService);
   }
 
   /**

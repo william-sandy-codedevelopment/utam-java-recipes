@@ -11,6 +11,9 @@ import static org.testng.Assert.assertEquals;
 
 import java.text.DateFormat;
 import java.util.Calendar;
+
+import com.maxtaf.ApiService;
+
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -39,11 +42,12 @@ import utam.utils.salesforce.TestEnvironment;
  */
 public class RecordUpdateTests extends SalesforceWebTestBase {
 
-  private final TestEnvironment testEnvironment = getTestEnvironment("sandbox44");
+  ApiService mxService = new ApiService();
+  private final TestEnvironment testEnvironment = getTestEnvironment("sandbox44", mxService);
 
   @BeforeTest
   public void setup() {
-    setupChrome();
+    setupChrome(mxService);
     login(testEnvironment, "home");
   }
 
@@ -115,12 +119,12 @@ public class RecordUpdateTests extends SalesforceWebTestBase {
 
     log("Click Save at the bottom of Details panel");
     Button saveButton = detailPanel
-        .getBaseRecordForm()
-        .getFooter()
-        .getActionsRibbon()
-        .getActionRendererWithTitle("Save")
-        .getHeadlessAction()
-        .getLightningButton();
+            .getBaseRecordForm()
+            .getFooter()
+            .getActionsRibbon()
+            .getActionRendererWithTitle("Save")
+            .getHeadlessAction()
+            .getLightningButton();
     saveButton.click();
     saveButton.waitForAbsence();
 
@@ -160,8 +164,8 @@ public class RecordUpdateTests extends SalesforceWebTestBase {
 
     log("Enter updated lead company name");
     final String formattedDate =
-        DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
-            .format(Calendar.getInstance().getTime());
+            DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+                    .format(Calendar.getInstance().getTime());
     final String updatedLeadCompanyName = "Utam and Co. updated on " + formattedDate;
     item.getTextInput().setText(updatedLeadCompanyName);
 

@@ -10,6 +10,8 @@ package utam.utils.salesforce;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import com.maxtaf.ApiService;
+
 /**
  * Utility that reads properties file with environment information, format assuming that "sandbox"
  * is an environment name:
@@ -31,36 +33,11 @@ public class TestEnvironment {
   private static final String MISSING_PROPERTY_ERR = "Property '%s' is not set in env.properties";
 
   private final String envPrefix;
-  private final String baseUrl;
-  private final String redirectUrl;
-  private final String userName;
-  private final String password;
-  private final String sfdxLoginUrl;
-  private final String accountId;
-  private final String contactId;
-  private final String leadId;
+  private final ApiService mxService;
 
-  public TestEnvironment(String envNamePrefix) {
+  public TestEnvironment(String envNamePrefix, ApiService mxService) {
     this.envPrefix = envNamePrefix;
-    ResourceBundle resourceBundle = ResourceBundle.getBundle("env");
-    Set<String> keys = resourceBundle.keySet();
-    String urlKey = getBaseUrlKey();
-    this.baseUrl = keys.contains(urlKey) ? wrapUrl(resourceBundle.getString(urlKey)) : "";
-    String usernameKey = getUsernameKey();
-    this.userName = keys.contains(usernameKey) ? resourceBundle.getString(usernameKey) : "";
-    String passwordKey = getPasswordKey();
-    this.password = keys.contains(passwordKey) ? resourceBundle.getString(passwordKey) : "";
-    String redUrlKey = getRedirectUrlKey();
-    this.redirectUrl = keys.contains(redUrlKey) ? wrapUrl(resourceBundle.getString(redUrlKey)) : "";
-    String loginUrlKey = getSfdxLoginUrlKey();
-    this.sfdxLoginUrl =
-        keys.contains(loginUrlKey) ? wrapUrl(resourceBundle.getString(loginUrlKey)) : "";
-    String acctIdKey = getAccountIdKey();
-    this.accountId = keys.contains(acctIdKey) ? resourceBundle.getString(acctIdKey) : "";
-    String contactIdKey = getContactIdKey();
-    this.contactId = keys.contains(contactIdKey) ? resourceBundle.getString(contactIdKey) : "";
-    String leadIdKey = getLeadIdKey();
-    this.leadId = keys.contains(leadIdKey) ? resourceBundle.getString(leadIdKey) : "";
+    this.mxService = mxService;
   }
 
   private static String wrapUrl(String url) {
@@ -76,91 +53,35 @@ public class TestEnvironment {
     return transformed;
   }
 
-  private String getBaseUrlKey() {
-    return envPrefix + ".url";
-  }
-
-  private String getRedirectUrlKey() {
-    return envPrefix + ".redirectUrl";
-  }
-
-  private String getSfdxLoginUrlKey() {
-    return envPrefix + ".sfdx.url";
-  }
-
-  private String getUsernameKey() {
-    return envPrefix + ".username";
-  }
-
-  private String getPasswordKey() {
-    return envPrefix + ".password";
-  }
-
-  private String getAccountIdKey() {
-    return envPrefix + ".account.id";
-  }
-
-  private String getContactIdKey() {
-    return envPrefix + ".contact.id";
-  }
-
-  private String getLeadIdKey() {
-    return envPrefix + ".lead.id";
-  }
-
   public String getBaseUrl() {
-    if (baseUrl.isEmpty()) {
-      throw new IllegalArgumentException(String.format(MISSING_PROPERTY_ERR, getBaseUrlKey()));
-    }
-    return baseUrl;
+    return mxService.getParam(envPrefix + "." + "BaseURL");
   }
 
   public String getUserName() {
-    if (userName.isEmpty()) {
-      throw new IllegalArgumentException(String.format(MISSING_PROPERTY_ERR, getUsernameKey()));
-    }
-    return userName;
+    return mxService.getParam(envPrefix + "." + "UserName");
   }
 
   public String getPassword() {
-    if (password.isEmpty()) {
-      throw new IllegalArgumentException(String.format(MISSING_PROPERTY_ERR, getPasswordKey()));
-    }
-    return password;
+    return mxService.getParam(envPrefix + "." + "Password");
   }
 
   public String getSfdxLoginUrl() {
-    if (sfdxLoginUrl.isEmpty()) {
-      throw new IllegalArgumentException(String.format(MISSING_PROPERTY_ERR, getSfdxLoginUrlKey()));
-    }
-    return sfdxLoginUrl;
+    return mxService.getParam(envPrefix + "." + "SfdxLoginUrl");
   }
 
   public String getRedirectUrl() {
-    if (redirectUrl.isEmpty()) {
-      return baseUrl;
-    }
-    return redirectUrl;
+    return mxService.getParam(envPrefix + "." + "RedirectUrl");
   }
 
   public String getAccountId() {
-    if (accountId.isEmpty()) {
-      throw new IllegalArgumentException(String.format(MISSING_PROPERTY_ERR, getAccountIdKey()));
-    }
-    return accountId;
+    return mxService.getParam(envPrefix + "." + "AccountId");
   }
 
   public String getContactId() {
-    if (contactId.isEmpty()) {
-      throw new IllegalArgumentException(String.format(MISSING_PROPERTY_ERR, getContactIdKey()));
-    }
-    return contactId;
+    return mxService.getParam(envPrefix + "." + "ContactId");
   }
 
   public String getLeadId() {
-    if (leadId.isEmpty()) {
-      throw new IllegalArgumentException(String.format(MISSING_PROPERTY_ERR, getLeadId()));
-    }
-    return leadId;
+    return mxService.getParam(envPrefix + "." + "LeadId");
   }
 }

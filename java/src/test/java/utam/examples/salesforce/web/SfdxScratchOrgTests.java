@@ -7,14 +7,15 @@
  */
 package utam.examples.salesforce.web;
 
+import com.maxtaf.ApiService;
+
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import utam.sfdx.pageobjects.Hello;
-import utam.sfdx.pageobjects.HomePage;
-import utam.sfdx.pageobjects.WireGetObjectInfo;
+import utam.pageobjects.Hello;
+import utam.pageobjects.HomePage;
+import utam.pageobjects.WireGetObjectInfo;
 import utam.utils.salesforce.TestEnvironment;
-
 /**
  * Test for a scratch org. See README for setup.
  *
@@ -23,12 +24,14 @@ import utam.utils.salesforce.TestEnvironment;
  */
 public class SfdxScratchOrgTests extends SalesforceWebTestBase {
 
+  ApiService mxService = new ApiService();
+
   private HomePage appHomePage;
 
   @BeforeTest
   public void loginToRecipeApp() {
-    setupChrome();
-    TestEnvironment testEnvironment = getTestEnvironment("scratchOrg");
+    setupChrome(mxService);
+    TestEnvironment testEnvironment = getTestEnvironment("scratchOrg", mxService);
     log("Navigate to login URL for a scratch org");
     getDriver().get(testEnvironment.getSfdxLoginUrl());
     log("Wait for Home Page URL");
