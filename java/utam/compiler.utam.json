@@ -1,0 +1,13 @@
+{
+  "module": "preview",
+  "pageObjectsRootDir": "/../mnt/project/utam/temp/",
+  "pageObjectsFilesMask": "(.*)\\.utam\\.json$",
+  "pageObjectsOutputDir": "/../mnt/project/java/src/test/java",
+  "resourcesOutputDir": "/../mnt/project/java/src/main/resources",
+  "unitTestsOutputDir": "/../mnt/project/java/src/test/java",
+  "unitTestsRunner": "NONE",
+  "namespaces": [{
+    "typeMatch": "utam",
+    "pathMatch": ".*"
+  }]
+}
