@@ -19,9 +19,9 @@ import org.testng.annotations.Test;
 import utam.base.UtamWebTestBase;
 import utam.core.element.BasicElement;
 import utam.core.selenium.element.LocatorBy;
-import utam.portal.pageobjects.Dummy;
-import utam.portal.pageobjects.NullableExample;
-import utam.portal.pageobjects.UtamDevHome;
+import utam.pageobjects.Dummy;
+import utam.pageobjects.NullableExample;
+import utam.pageobjects.UtamDevHome;
 
 /**
  * Example of tests for https://utam.dev
